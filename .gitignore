@@ -6,7 +6,14 @@
    *.xml
    *.xlsx  
    *.zip
-   raw_downloads/
+   
+   #dataset
+   input\hcpc\HCPC2025_OCT_ANWEB.csv
+   input\icd10US\icd10cm_order_2026_US.txt
+   input\icd10WHO\icd102019syst_codes_WHO.txt
+   input\loinc\Loinc.csv
+   input\npi\npidata_pfile_20050523-20250810.csv
+   
    
    # Processed files are OK to commit
    # output/ - keep these
