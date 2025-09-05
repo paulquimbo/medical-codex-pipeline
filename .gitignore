@@ -1,6 +1,6 @@
-   ```gitignore
-   # Raw data files (exclude from repo)
+# Raw data files (exclude from repo)
    input/
+   /input
    *.txt
    *.csv
    *.xml
@@ -28,6 +28,6 @@
    # IDE
    .vscode/
    .idea/
-   ```
-   
+  
+
 /input
