@@ -1,4 +1,5 @@
 import pandas as pd
+from utils.common_functions import save_to_csv
 
 # Loading Data Set and have it as a variable
 loinc = pd.read_csv('input/loinc/Loinc.csv')
@@ -31,4 +32,4 @@ shortloinc = shortloinc.rename(columns={
 
 shortloinc
 
-shortloinc.to_csv('output/csv/loinc_short.csv', index=False)
+save_to_csv(shortloinc, 'loinc_short.csv')

@@ -1,5 +1,5 @@
 import pandas as pd
-
+from utils.common_functions import save_to_csv
 # Loading Data Set and have it as a variable
 hcpc_df = pd.read_csv('input/hcpc/HCPC2025_OCT_ANWEB.csv')
 
@@ -34,4 +34,4 @@ shorthcpc = shorthcpc.rename(columns={
 
 shorthcpc
 
-shorthcpc.to_csv('output/csv/hcpc_short.csv', index=False)
+save_to_csv(shorthcpc,'hcpc_short.csv')

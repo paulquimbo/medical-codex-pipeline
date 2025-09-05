@@ -1,3 +1,8 @@
 import pandas as pd
 
-'save_to_formats(df, base_filename)'
+# Define your reusable path
+CSV_PATH = 'output/csv/'
+
+def save_to_csv(df, filename):
+  
+    df.to_csv(CSV_PATH + filename, index=False)
