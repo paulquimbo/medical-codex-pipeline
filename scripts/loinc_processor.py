@@ -9,7 +9,7 @@ loinc.info()
 # Displays the first 5 rows of the dataframe
 print(loinc.head())
 
-# Column Exploration and checking potental columns of interest
+# Column Exploration and checking potential columns to be used
 ## Displays the column information of the dataframe
 loinc.LOINC_NUM
 loinc.LONG_COMMON_NAME
