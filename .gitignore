@@ -8,13 +8,14 @@
    *.zip
    
    #dataset
-   input\hcpc\HCPC2025_OCT_ANWEB.csv
-   input\icd10US\icd10cm_order_2026_US.txt
-   input\icd10WHO\icd102019syst_codes_WHO.txt
-   input\loinc\Loinc.csv
-   input\npi\npidata_pfile_20050523-20250810.csv
-   
-   
+   input/hcpc/HCPC2025_OCT_ANWEB.csv
+   input/icd10US/icd10cm_order_2026_US.txt
+   input/icd10WHO/icd102019syst_codes_WHO.txt
+   input/loinc/Loinc.csv
+   input/npi/npidata_pfile_20050523-20250810.csv
+   input/rxnorm/RXNSAT.RRF
+   input/snomed/der2_iisssccRefset_ExtendedMapFull_US1000124_20250301.txt
+      
    # Processed files are OK to commit
    # output/ - keep these
    
