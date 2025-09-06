@@ -29,8 +29,6 @@ Python scripts were developed to process each medical codex listed below. For ev
 
 ## Codexes Processed and Reference Data Sources
 
-Based on the company’s `about.md` reference, the following codexes are supported:
-
 | Codex Name         | Description                        | Source Link |
 |--------------------|------------------------------------|-------------|
 | SNOMED CT (US)     | Clinical terminology               | [SNOMED Archive](https://www.nlm.nih.gov/healthit/snomedct/archive.html) |
