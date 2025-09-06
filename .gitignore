@@ -31,3 +31,10 @@
    .vscode/
    .idea/
   
+input/icd10WHO/icd102019syst_codes_WHO.txt
+input/hcpc/HCPC2025_OCT_ANWEB.csv
+input/icd10US/icd10cm_order_2026_US.txt
+input/loinc/Loinc.csv
+input/npi/npidata_pfile_20050523-20250810.csv
+input/rxnorm/RXNATOMARCHIVE.RRF
+input/snomed/der2_iisssccRefset_ExtendedMapFull_US1000124_20250301.txt
