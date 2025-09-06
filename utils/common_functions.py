@@ -1,8 +1,16 @@
+import polars as pl
 import pandas as pd
+from pathlib import Path
 
-# Define your reusable path
-CSV_PATH = 'output/csv/'
+CSV_PATH = Path("output/csv")
 
 def save_to_csv(df, filename):
-  
-    df.to_csv(CSV_PATH + filename, index=False)
+    ###Save a DataFrame (Polars or pandas) to CSV in the output/csv directory###
+    filepath = CSV_PATH / filename
+
+    if isinstance(df, pl.DataFrame):
+        df.write_csv(str(filepath))
+    elif isinstance(df, pd.DataFrame):
+        df.to_csv(filepath, index=False)
+    else:
+        raise TypeError(f"Unsupported DataFrame type: {type(df)}")

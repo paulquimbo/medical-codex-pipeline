@@ -1,6 +1,6 @@
 # Raw data files (exclude from repo)
-   input/
-   /input
+   input/*.*
+   /input/*.*
    *.txt
    *.csv
    *.xml
@@ -20,7 +20,9 @@
    # output/ - keep these
    
    # Python
+   /utils
    __pycache__/
+   /__pycache__
    *.pyc
    .env
    venv/

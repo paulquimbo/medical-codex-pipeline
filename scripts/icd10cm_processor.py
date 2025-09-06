@@ -1,5 +1,8 @@
 import pandas as pd
+
+# using common function to save to csv
 from utils.common_functions import save_to_csv
+
 # Loading Data Set and with no headers, will use fixed-with  format
 ## Assing column names to the dataframe
 icd10us = pd.read_fwf('input/icd10US/icd10cm_order_2026_US.txt', 

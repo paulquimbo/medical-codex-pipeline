@@ -1,4 +1,6 @@
 import pandas as pd
+
+# using common function to save to csv
 from utils.common_functions import save_to_csv
 
 # Loading Data Set and have it as a variable
