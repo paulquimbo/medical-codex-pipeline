@@ -4,3 +4,4 @@ requests
 os
 zipfile
 openpyxl
+bs4

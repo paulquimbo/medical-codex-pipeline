@@ -56,7 +56,7 @@ shorticd10who = shorticd10who.rename(columns={
 })
 
 #removing empty descriptions or nulls or blanks 
-shorticd10us = shorticd10who[
+shorticd10who = shorticd10who[
     shorticd10who['Description'].notna() & 
     (shorticd10who['Description'].str.strip() != "")
 ]
