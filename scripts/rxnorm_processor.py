@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 
 # using common function to save to csv
 from utils.common_functions import save_to_csv
@@ -19,10 +20,10 @@ rxnorm[[2]]
 rxnorm[[3]]
 
 ### Selecting columns of interest and adding to a new dataframe
-shortrxnorm = rxnorm[[1, 2]]
+shortrxnorm = rxnorm[[1, 2]].copy()
 
 # adding a new column to the new dataframe with a default value
-shortrxnorm ['last_updated'] = '09-05-2025'
+shortrxnorm ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
 # renaming column names from shortlist
 shortrxnorm = shortrxnorm.rename(columns={

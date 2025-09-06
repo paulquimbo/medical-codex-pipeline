@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 
 # using common function to save to csv
 from utils.common_functions import save_to_csv
@@ -21,10 +22,11 @@ loinc.DisplayName
 loinc.DefinitionDescription
 
 ### Selecting columns of interest and adding to a new dataframe
-shortloinc = loinc[['LOINC_NUM', 'LONG_COMMON_NAME']]
+shortloinc = loinc[['LOINC_NUM', 'LONG_COMMON_NAME']].copy()
 
 # adding a new column to the new dataframe with a default value
-shortloinc ['last_updated'] = '09-04-2025'
+shortloinc ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
+
 
 # renaming column names from shortlist
 shortloinc = shortloinc.rename(columns={

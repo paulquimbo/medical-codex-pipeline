@@ -1,3 +1,6 @@
 polars
 pandas
 requests
+os
+zipfile
+openpyxl

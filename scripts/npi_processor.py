@@ -1,4 +1,5 @@
 import polars as pl
+from datetime import datetime
 
 # using common function to save to csv
 from utils.common_functions import save_to_csv
@@ -30,13 +31,19 @@ shortnpicode = npicode[[
     'Provider Organization Name (Legal Business Name)', 
     'Provider First Name', 
     'Provider Last Name (Legal Name)'
-    ]]
+    ]].copy()   
 
 print(shortnpicode.head())
 
 # adding a new column to the new dataframe with a default value using polars syntax
+# Get today's date in MM-DD-YYYY format
+today = datetime.today().strftime('%m-%d-%Y')
+
+# Add it as a new column
 shortnpicode = shortnpicode.with_columns([
-    pl.lit("09-05-2025").alias("last_updated")])
+    pl.lit(today).alias("last_updated")
+])
+
 
 # Displays the first 5 rows of the dataframe
 print(shortnpicode.head())
@@ -56,7 +63,7 @@ shortnpicode_org = shortnpicode[[
     'NPI', 
     'Provider Organization Name (Legal Business Name)', 
     'last_updated', 
-    ]]
+    ]].copy()
 
 # renaming column names from shortlist
 shortnpicode_org = shortnpicode_org.rename({
@@ -80,7 +87,7 @@ shortnpicode_full = shortnpicode[[
     'NPI', 
     'Full Name', 
     'last_updated', 
-    ]]
+    ]].copy()
 
 # renaming column names from shortlist
 shortnpicode_full = shortnpicode_full.rename({
@@ -94,10 +101,6 @@ shortnpicode_full = shortnpicode_full.filter(
     (pl.col("Description").str.strip_chars()!=("")))
 
 print(shortnpicode_full.head)
-
-
-
-
 
 save_to_csv(shortnpicode_org, "npicode_org_short.csv")
 save_to_csv(shortnpicode_full,"npicode_full_short.csv")

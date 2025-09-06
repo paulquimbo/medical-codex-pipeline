@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 
 # using common function to save to csv
 from utils.common_functions import save_to_csv
@@ -22,10 +23,10 @@ snomed.term
 snomed.caseSignificanceId
 
 ### Selecting columns of interest and adding to a new dataframe
-shortsnomed = snomed[['id', 'term']]
+shortsnomed = snomed[['id', 'term']].copy()
 
 # adding a new column to the new dataframe with a default value
-shortsnomed ['last_updated'] = '09-05-2025'
+shortsnomed ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
 # renaming column names from shortlist
 shortsnomed = shortsnomed.rename(columns={

@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 
 # using common function to save to csv
 from utils.common_functions import save_to_csv
@@ -25,10 +26,10 @@ icd10us.Description1
 
 
 ### Selecting columns of interest and adding to a new dataframe
-shorticd10us = icd10us[['Code', 'Description1']]
+shorticd10us = icd10us[['Code', 'Description1']].copy()
 
 # adding a new column to the new dataframe with a default value
-shorticd10us ['last_updated'] = '09-05-2025'
+shorticd10us ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
 # renaming column names from shortlist
 shorticd10us = shorticd10us.rename(columns={

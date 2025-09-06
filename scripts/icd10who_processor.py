@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 
 # using common function to save to csv
 from utils.common_functions import save_to_csv
@@ -45,10 +46,10 @@ icd10who = icd10who.rename(columns = {
 print(icd10who.head())
 icd10who.info()
 ### Selecting columns of interest and adding to a new dataframe
-shorticd10who = icd10who[['Code3', 'Description']]
+shorticd10who = icd10who[['Code3', 'Description']].copy()
 
 # adding a new column to the new dataframe with a default value
-shorticd10who ['last_updated'] = '09-05-2025'
+shorticd10who ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
 # renaming column names from shortlist
 shorticd10who = shorticd10who.rename(columns={

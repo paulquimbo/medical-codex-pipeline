@@ -1,14 +1,11 @@
 import pandas as pd
+from datetime import datetime
 
 # using common function to save to csv
 from utils.common_functions import save_to_csv
 
 # Loading Data Set and have it as a variable
-hcpc_df = pd.read_csv('input/hcpc/HCPC2025_OCT_ANWEB.csv')
-
-# removing whitespaces from column names
-hcpc_df.columns = hcpc_df.columns.str.strip()
-
+hcpc_df = pd.read_excel('input/hcpc/HCPC2025_OCT_ANWEB.xlsx')
 
 # Dispays rows and column information of the dataframe
 hcpc_df.info()
@@ -24,10 +21,10 @@ hcpc_df['LONG DESCRIPTION']
 hcpc_df['SHORT DESCRIPTION']
 
 ### Selecting columns of interest and adding to a new dataframe
-shorthcpc = hcpc_df[['HCPC', 'LONG DESCRIPTION']]
+shorthcpc = hcpc_df[['HCPC', 'LONG DESCRIPTION']].copy()
 
 # adding a new column to the new dataframe with a default value
-shorthcpc ['last_updated'] = '09-05-2025'
+shorthcpc ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
 # renaming column names from shortlist
 shorthcpc = shorthcpc.rename(columns={
