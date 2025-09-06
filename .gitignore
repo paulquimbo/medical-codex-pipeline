@@ -1,6 +1,7 @@
 # Raw data files (exclude from repo)
 input/*.*
 /input
+private_scripts/*.*
 
 #dataset 
 input/icd10WHO/icd102019syst_codes_WHO.txt
