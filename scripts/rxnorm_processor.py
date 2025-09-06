@@ -1,37 +1,44 @@
 import pandas as pd
 from datetime import datetime
 
-# using common function to save to csv
+# Import shared utility for saving DataFrames to CSV
 from utils.common_functions import save_to_csv
 
-# Loading Data Set and have it as a variable
-rxnorm = pd.read_csv("input/rxnorm/RXNATOMARCHIVE.RRF", sep="|", header=None, dtype=str)
+# Load RxNorm dataset (pipe-delimited, no headers in source file)
+rxnorm = pd.read_csv(
+    "input/rxnorm/RXNATOMARCHIVE.RRF",
+    sep="|",
+    header=None,
+    dtype=str
+)
 
-# Dispays rows and column information of the dataframe
+# Display structure and column metadata
 rxnorm.info()
 
-# Displays the first 5 rows of the dataframe
+# Preview first 5 rows
 print(rxnorm.head())
 
-# Column Exploration and checking potential columns to be used
-## Displays the column information of the dataframe
-rxnorm[[1]]
-rxnorm[[2]]
-rxnorm[[3]]
+# Explore key columns by index
+rxnorm[1]
+rxnorm[2]
+rxnorm[3]
 
-### Selecting columns of interest and adding to a new dataframe
+# Create a simplified DataFrame with selected columns
 shortrxnorm = rxnorm[[1, 2]].copy()
 
-# adding a new column to the new dataframe with a default value
-shortrxnorm ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
+# Add timestamp column for tracking updates
+shortrxnorm['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
-# renaming column names from shortlist
+# Rename columns for clarity and consistency
 shortrxnorm = shortrxnorm.rename(columns={
     1: 'Code',
     2: 'Description'
 })
 
+#removing empty descriptions or nulls or blanks 
+shortrxnorm = shortrxnorm[
+    shortrxnorm['Description'].notna() & 
+    (shortrxnorm['Description'].str.strip() != "")]
 
-shortrxnorm
-
+# Save cleaned subset to CSV using shared utility
 save_to_csv(shortrxnorm, 'rxnorm_short.csv')

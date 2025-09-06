@@ -1,28 +1,25 @@
 import pandas as pd
 from datetime import datetime
 
-# using common function to save to csv
+# Import shared utility for saving DataFrames to CSV
 from utils.common_functions import save_to_csv
 
-# Loading Data Set and with no headers, base on the raw data we see they are using semicolon as delimiter
-# add sep and encoding parameters when reading the csv file
+# Load ICD-10 WHO dataset (semicolon-delimited, no headers in source file)
 icd10who = pd.read_csv(
     'input/icd10WHO/icd102019syst_codes_WHO.txt',
     header=None,
-    sep=';',           # semicolon delimiter
-    encoding='utf-8'   # adjust encoding type if you encounter issues
+    sep=';',         # Semicolon delimiter
+    encoding='utf-8' # Adjust if encoding issues arise
 )
 
-
-# Dispays rows and column information of the dataframe
+# Display structure and column metadata
 icd10who.info()
 
-# Displays the first 5 rows of the dataframe
+# Preview first 5 rows
 print(icd10who.head())
 
-# Base on the result above we can see that the coloumns have default names 0,1,2,3, etc
-# we can rename those numbers to a more meaningful name
-icd10who = icd10who.rename(columns = {
+# Rename default column indices to meaningful names
+icd10who = icd10who.rename(columns={
     0: 'Num1',
     1: 'Let1',
     2: 'Let2',
@@ -43,19 +40,26 @@ icd10who = icd10who.rename(columns = {
     17: 'Code14'
 })
 
+# Recheck structure after renaming
 print(icd10who.head())
 icd10who.info()
-### Selecting columns of interest and adding to a new dataframe
+
+# Create a simplified DataFrame with selected columns
 shorticd10who = icd10who[['Code3', 'Description']].copy()
 
-# adding a new column to the new dataframe with a default value
-shorticd10who ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
+# Add timestamp column for tracking updates
+shorticd10who['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
-# renaming column names from shortlist
+# Rename columns for clarity and consistency
 shorticd10who = shorticd10who.rename(columns={
-        'Code3': 'Code'
+    'Code3': 'Code'
 })
 
-shorticd10who
+#removing empty descriptions or nulls or blanks 
+shorticd10us = shorticd10who[
+    shorticd10who['Description'].notna() & 
+    (shorticd10who['Description'].str.strip() != "")
+]
 
+# Save cleaned subset to CSV using shared utility
 save_to_csv(shorticd10who, 'icd10who_short.csv')

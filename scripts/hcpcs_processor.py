@@ -1,37 +1,34 @@
 import pandas as pd
 from datetime import datetime
 
-# using common function to save to csv
+# Import shared utility function for saving DataFrames to CSV
 from utils.common_functions import save_to_csv
 
-# Loading Data Set and have it as a variable
+# Load HCPC dataset from Excel file
 hcpc_df = pd.read_excel('input/hcpc/HCPC2025_OCT_ANWEB.xlsx')
 
-# Dispays rows and column information of the dataframe
+# Display basic structure and column info
 hcpc_df.info()
 
-# Displays the first 5 rows of the dataframe
+# Preview the first 5 rows
 print(hcpc_df.head())
 
-# Column Exploration and checking potential columns to be used
-## Displays the column information of the dataframe
-### If your dataframe has spaces headers, you can access them by using brackets []
-hcpc_df.HCPC
+# Explore key columns (use bracket notation for headers with spaces)
+hcpc_df['HCPC']
 hcpc_df['LONG DESCRIPTION']
 hcpc_df['SHORT DESCRIPTION']
 
-### Selecting columns of interest and adding to a new dataframe
+# Create a trimmed DataFrame with selected columns
 shorthcpc = hcpc_df[['HCPC', 'LONG DESCRIPTION']].copy()
 
-# adding a new column to the new dataframe with a default value
-shorthcpc ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
+# Add a timestamp column for tracking updates
+shorthcpc['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
-# renaming column names from shortlist
+# Rename columns for clarity and consistency
 shorthcpc = shorthcpc.rename(columns={
     'HCPC': 'Code',
     'LONG DESCRIPTION': 'Description'
 })
 
-shorthcpc
-
-save_to_csv(shorthcpc,'hcpc_short.csv')
+# Save the cleaned subset to CSV using shared utility
+save_to_csv(shorthcpc, 'hcpc_short.csv')

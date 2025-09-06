@@ -1,39 +1,41 @@
 import pandas as pd
 from datetime import datetime
 
-# using common function to save to csv
+# Import shared utility for saving DataFrames to CSV
 from utils.common_functions import save_to_csv
 
-# Loading Data Set and have it as a variable
+# Load LOINC dataset from CSV file
 loinc = pd.read_csv('input/loinc/Loinc.csv')
 
-# Dispays rows and column information of the dataframe
+# Display structure and column metadata
 loinc.info()
 
-# Displays the first 5 rows of the dataframe
+# Preview first 5 rows
 print(loinc.head())
 
-# Column Exploration and checking potential columns to be used
-## Displays the column information of the dataframe
-loinc.LOINC_NUM
-loinc.LONG_COMMON_NAME
-loinc.SHORTNAME
-loinc.DisplayName
-loinc.DefinitionDescription
+# Explore key columns (use dot or bracket notation)
+loinc['LOINC_NUM']
+loinc['LONG_COMMON_NAME']
+loinc['SHORTNAME']
+loinc['DisplayName']
+loinc['DefinitionDescription']
 
-### Selecting columns of interest and adding to a new dataframe
+# Create a simplified DataFrame with selected columns
 shortloinc = loinc[['LOINC_NUM', 'LONG_COMMON_NAME']].copy()
 
-# adding a new column to the new dataframe with a default value
-shortloinc ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
+# Add timestamp column for tracking updates
+shortloinc['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
-
-# renaming column names from shortlist
+# Rename columns for clarity and consistency
 shortloinc = shortloinc.rename(columns={
     'LOINC_NUM': 'Code',
     'LONG_COMMON_NAME': 'Description'
 })
 
-shortloinc
+#removing empty descriptions or nulls or blanks 
+shortloinc = shortloinc[
+    shortloinc['Description'].notna() & 
+    (shortloinc['Description'].str.strip() != "")]
 
+# Save cleaned subset to CSV using shared utility
 save_to_csv(shortloinc, 'loinc_short.csv')

@@ -1,42 +1,47 @@
 import pandas as pd
 from datetime import datetime
 
-# using common function to save to csv
+# Import shared utility for saving DataFrames to CSV
 from utils.common_functions import save_to_csv
 
-# Reading the SNOMED CT description file into a pandas dataframe and limiting to first 100,000 rows for testing
-# add sep and encoding parameters when reading the csv file
-snomed = pd.read_csv('input/snomed/sct2_Description_Full-en_US1000124_20250301.txt', sep='\t', nrows=100000)
+# Load SNOMED CT description file (tab-delimited, limited to 100,000 rows for testing)
+snomed = pd.read_csv(
+    'input/snomed/sct2_Description_Full-en_US1000124_20250301.txt',
+    sep='\t',
+    nrows=100000
+)
 
-
-# Dispays rows and column information of the dataframe
+# Display structure and column metadata
 snomed.info()
 
-# Displays the first 5 rows of the dataframe
+# Preview first 5 rows
 print(snomed.head())
 
+# Explore key columns
+snomed['id']
+snomed['term']
+snomed['caseSignificanceId']
 
-# Column Exploration and checking potential columns to be used
-## Displays the column information of the dataframe
-snomed.id
-snomed.term
-snomed.caseSignificanceId
-
-### Selecting columns of interest and adding to a new dataframe
+# Create a simplified DataFrame with selected columns
 shortsnomed = snomed[['id', 'term']].copy()
 
-# adding a new column to the new dataframe with a default value
-shortsnomed ['last_updated'] = datetime.today().strftime('%m-%d-%Y')
+# Add timestamp column for tracking updates
+shortsnomed['last_updated'] = datetime.today().strftime('%m-%d-%Y')
 
-# renaming column names from shortlist
+# Rename columns for clarity and consistency
 shortsnomed = shortsnomed.rename(columns={
-        'id': 'Code',
-        'term': 'Description'})
+    'id': 'Code',
+    'term': 'Description'
+})
 
-
-#removing duplicate rows if any
+# Remove duplicate rows
 shortsnomed = shortsnomed.drop_duplicates()
 
-shortsnomed
+# Filter out empty or null descriptions
+shortsnomed = shortsnomed[
+    shortsnomed['Description'].notna() &
+    (shortsnomed['Description'].str.strip() != "")
+]
 
+# Save cleaned subset to CSV using shared utility
 save_to_csv(shortsnomed, 'snomed_short.csv')
