@@ -3,9 +3,9 @@ import pandas as pd
 # using common function to save to csv
 from utils.common_functions import save_to_csv
 
-# Reading the SNOMED CT description file into a pandas dataframe and limiting to first 10,000 rows for testing
+# Reading the SNOMED CT description file into a pandas dataframe and limiting to first 100,000 rows for testing
 # add sep and encoding parameters when reading the csv file
-snomed = pd.read_csv('input/snomed/sct2_Description_Full-en_US1000124_20250301.txt', sep='\t', nrows=5000)
+snomed = pd.read_csv('input/snomed/sct2_Description_Full-en_US1000124_20250301.txt', sep='\t', nrows=100000)
 
 
 # Dispays rows and column information of the dataframe
@@ -31,6 +31,10 @@ shortsnomed ['last_updated'] = '09-05-2025'
 shortsnomed = shortsnomed.rename(columns={
         'id': 'Code',
         'term': 'Description'})
+
+
+#removing duplicate rows if any
+shortsnomed = shortsnomed.drop_duplicates()
 
 shortsnomed
 
