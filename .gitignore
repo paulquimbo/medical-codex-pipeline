@@ -1,40 +1,27 @@
 # Raw data files (exclude from repo)
-   input/*.*
-   /input/*.*
-   *.txt
-   *.csv
-   *.xml
-   *.xlsx  
-   *.zip
-   
-   #dataset
-   input/hcpc/HCPC2025_OCT_ANWEB.csv
-   input/icd10US/icd10cm_order_2026_US.txt
-   input/icd10WHO/icd102019syst_codes_WHO.txt
-   input/loinc/Loinc.csv
-   input/npi/npidata_pfile_20050523-20250810.csv
-   input/rxnorm/RXNSAT.RRF
-   input/snomed/der2_iisssccRefset_ExtendedMapFull_US1000124_20250301.txt
-      
-   # Processed files are OK to commit
-   # output/ - keep these
-   
-   # Python
-   /utils
-   __pycache__/
-   /__pycache__
-   *.pyc
-   .env
-   venv/
-   
-   # IDE
-   .vscode/
-   .idea/
-  
+input/*.*
+/input
+
+#dataset 
 input/icd10WHO/icd102019syst_codes_WHO.txt
 input/hcpc/HCPC2025_OCT_ANWEB.csv
 input/icd10US/icd10cm_order_2026_US.txt
 input/loinc/Loinc.csv
 input/npi/npidata_pfile_20050523-20250810.csv
 input/rxnorm/RXNATOMARCHIVE.RRF
-input/snomed/der2_iisssccRefset_ExtendedMapFull_US1000124_20250301.txt
+input/snomed/sct2_Description_Full-en_US1000124_20250301.txt
+
+
+#python
+/utils
+__pycache__
+*.pyc
+.env
+/venv
+
+#IDE   
+.vscode
+.idea
+
+/raw_downloads
+
