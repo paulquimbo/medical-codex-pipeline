@@ -5,3 +5,4 @@ os
 zipfile
 openpyxl
 bs4
+pathlib
